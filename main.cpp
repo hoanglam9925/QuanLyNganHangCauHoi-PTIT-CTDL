@@ -21,6 +21,8 @@ int main()
     if (p != NULL)
     {
         cout << "Tim thay mon hoc: " << p->maMon << " - " << p->tenMon << endl;
+        xoaMonHocTrongDanhSach(root, maMon);
+        xuatDanhSachMonHoc(root);
     }
     else
     {

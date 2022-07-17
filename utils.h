@@ -22,24 +22,13 @@ int nhapso(string msg = "")
         }
     }
 }
-string nhapchuoi(string msg = "", int maxLength = 15)
+string nhapchuoi(string msg = "", int maxLength = 999)
 {
+    fflush(stdin);
     string a;
     cout << msg;
-    while (true)
-    {
-        cin >> a;
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << msg;
-        }
-        else
-        {
-            a.resize(maxLength);
-            return a;
-        }
-    }
+    getline(cin, a);
+    a.resize(maxLength);
+    return a;
 }
 #endif

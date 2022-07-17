@@ -36,6 +36,16 @@ int themMonHocVaoDanhSachMonHoc(DanhSachMonHoc &root, NodeMonHoc *p)
 {
     if (root != NULL)
     {
+        /**
+        int string::compare (const string& str) const
+        Returns:
+        0 : if both strings are equal.
+        A value < 0 : if *this is shorter than str or,
+        first character that doesn't match is smaller than str.
+        A value > 0 : if *this is longer than str or,
+        first character that doesn't match is greater
+         *
+         */
         if (root->maMon.compare(p->maMon) > 0)
         {
             themMonHocVaoDanhSachMonHoc(root->left, p);
@@ -62,10 +72,8 @@ void nhapMonHoc(DanhSachMonHoc &root)
         string maMon, tenMon;
         cout << "Nhap thong tin mon hoc thu " << i << endl;
         maMon = nhapchuoi("Nhap ma mon: ");
-        getchar();
         cout << "Nhap ten mon: ";
-        cin >> tenMon;
-        getchar();
+        getline(cin, tenMon);
         NodeMonHoc *p = taoMonHocMoi(maMon, tenMon);
         themMonHocVaoDanhSachMonHoc(root, p);
     }
@@ -98,6 +106,62 @@ NodeMonHoc *timKiemMonHoc(DanhSachMonHoc root, string maMon)
         }
     }
     return NULL;
+}
+
+void FindReplNode(DanhSachMonHoc &p, DanhSachMonHoc &q)
+{
+    if (q->left)
+    {
+        FindReplNode(p, q->left);
+    }
+    else
+    {
+        p->maMon = q->maMon;
+        p->tenMon = q->tenMon;
+        p = q;
+        q = q->right;
+    }
+}
+void xoaMonHocTrongDanhSach(DanhSachMonHoc &root, string maMon)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (root->maMon.compare(maMon) > 0)
+    {
+        xoaMonHocTrongDanhSach(root->left, maMon);
+    }
+    else if (root->maMon.compare(maMon) < 0)
+    {
+        xoaMonHocTrongDanhSach(root->right, maMon);
+    }
+    else
+    {
+        if (root->left == NULL && root->right == NULL)
+        {
+            delete root;
+            root = NULL;
+        }
+        else if (root->left == NULL)
+        {
+            DanhSachMonHoc p = root;
+            root = root->right;
+            delete p;
+        }
+        else if (root->right == NULL)
+        {
+            DanhSachMonHoc p = root;
+            root = root->left;
+            delete p;
+        }
+        else
+        {
+            DanhSachMonHoc p = root;
+            FindReplNode(p, p->right);
+            delete p;
+        }
+    }
 }
 // void LNR(DanhSachMonHoc root)
 // {
