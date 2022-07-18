@@ -4,29 +4,20 @@
 #include "file.h"
 #include "DSMonHoc.h"
 #include "utils.h"
+#include "DSCauHoiThi.h"
+
 using namespace std;
 
 int main()
 {
     // mainmenu();
-
-    DanhSachMonHoc root;
-    khoiTaoDanhSachMonHoc(root);
-    nhapMonHoc(root);
-    printf("Duyet cay theo NLR\n");
-    xuatDanhSachMonHoc(root);
-    cout << "Tim Node:" << endl;
-    string maMon = nhapchuoi("Nhap ma mon: ");
-    NodeMonHoc *p = timKiemMonHoc(root, maMon);
-    if (p != NULL)
-    {
-        cout << "Tim thay mon hoc: " << p->maMon << " - " << p->tenMon << endl;
-        xoaMonHocTrongDanhSach(root, maMon);
-        xuatDanhSachMonHoc(root);
-    }
-    else
-    {
-        cout << "Khong tim thay mon hoc" << endl;
-    }
+    CauHoiThi a[200];
+    int length = 0;
+    themCauHoiThi(a, length);
+    themCauHoiThi(a, length);
+    themCauHoiThi(a, length);
+    xuatToanBoCauHoi(a, length);
+    xoaCauHoiThi(a, 1, length);
+     xuatToanBoCauHoi(a, length);
     return 0;
 }

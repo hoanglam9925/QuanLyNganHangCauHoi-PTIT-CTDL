@@ -3,8 +3,11 @@
 #include <bits/stdc++.h>
 #include <string>
 
+using namespace std;
+
 int nhapso(string msg = "")
 {
+    fflush(stdin);
     int a;
     cout << msg;
     while (true)

@@ -4,12 +4,13 @@
 #include <stdlib.h>
 #include <string>
 #include "utils.h"
-
+#include "DSCauHoiThi.h"
 typedef struct NodeMonHoc
 {
     string maMon; // use str.resize(15) to fix the size of maMon
     string tenMon;
-    // Ds cau hoi thi
+    CauHoiThi cauHoiThi[200];
+    int length = 0;
     NodeMonHoc *left;
     NodeMonHoc *right;
 };
@@ -163,29 +164,23 @@ void xoaMonHocTrongDanhSach(DanhSachMonHoc &root, string maMon)
         }
     }
 }
-// void LNR(DanhSachMonHoc root)
-// {
-//     if (root != NULL)
+// DanhSachMonHoc root;
+//     khoiTaoDanhSachMonHoc(root);
+//     nhapMonHoc(root);
+//     printf("Duyet cay theo NLR\n");
+//     xuatDanhSachMonHoc(root);
+//     cout << "Tim Node:" << endl;
+//     string maMon = nhapchuoi("Nhap ma mon: ");
+//     NodeMonHoc *p = timKiemMonHoc(root, maMon);
+//     if (p != NULL)
 //     {
-//         // su dung de quy de duyet tiep cay con trai
-//         LNR(root->left);
-//         // xy ly NodeMonHoc goc
-//         printf("%d \t", root->data);
-//         // su dung de quy de duyet tiep cay con phai
-//         LNR(root->right);
+//         cout << "Tim thay mon hoc: " << p->maMon << " - " << p->tenMon << endl;
+//         xoaMonHocTrongDanhSach(root, maMon);
+//         xuatDanhSachMonHoc(root);
 //     }
-// }
-// void LRN(DanhSachMonHoc root)
-// {
-//     if (root != NULL)
+//     else
 //     {
-//         // su dung de quy de duyet tiep cay con trai
-//         LRN(root->left);
-//         // su dung de quy de duyet tiep cay con phai
-//         LRN(root->right);
-//         // xu ly NodeMonHoc goc
-//         printf("%d \t", root->data);
+//         cout << "Khong tim thay mon hoc" << endl;
 //     }
-// }
 
 #endif
