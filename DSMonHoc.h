@@ -72,9 +72,8 @@ void nhapMonHoc(DanhSachMonHoc &root)
     {
         string maMon, tenMon;
         cout << "Nhap thong tin mon hoc thu " << i << endl;
-        maMon = nhapchuoi("Nhap ma mon: ");
-        cout << "Nhap ten mon: ";
-        getline(cin, tenMon);
+        maMon = nhapchuoi("Nhap ma mon: ", 15);
+        tenMon = nhapchuoi("Nhap ten mon: ");
         NodeMonHoc *p = taoMonHocMoi(maMon, tenMon);
         themMonHocVaoDanhSachMonHoc(root, p);
     }
