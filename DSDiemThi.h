@@ -6,6 +6,7 @@
 struct DiemSinhVien
 {
     string maSv;
+    string maMon;
     int diem;
 };
 
@@ -87,5 +88,20 @@ void suaDiemThi(ListDiemThi &l, string maSv, string maMon, int diem)
         }
         p = p->next;
     }
+}
+
+void nhapDiemThi(ListDiemThi &l)
+{
+    DiemThi dt;
+    string maSv, maMon;
+    int diem;
+    maSv = nhapchuoi("Nhap ma sinh vien: ");
+    maMon = nhapchuoi("Nhap ma mon: ");
+    diem = nhapso("Nhap diem: ");
+    dt.sinhVien.maSv = maSv;
+    dt.sinhVien.diem = diem;
+    dt.sinhVien.maMon = maMon;
+    dt.maMon = maMon;
+    themDiemThi(l, dt);
 }
 #endif

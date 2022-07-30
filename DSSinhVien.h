@@ -2,6 +2,7 @@
 #define __DS_SINH_VIEN__
 #include <bits/stdc++.h>
 #include "utils.h"
+#include "DSDiemThi.h"
 using namespace std;
 
 struct SinhVien
@@ -11,6 +12,7 @@ struct SinhVien
     string ten;
     string gioiTinh;
     string password;
+    DiemThi *diem;
     SinhVien *next;
 };
 
