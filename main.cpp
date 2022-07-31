@@ -10,14 +10,7 @@ using namespace std;
 
 int main()
 {
-    // mainmenu();
-    CauHoiThi a[200];
-    int length = 0;
-    themCauHoiThi(a, length);
-    themCauHoiThi(a, length);
-    themCauHoiThi(a, length);
-    xuatToanBoCauHoi(a, length);
-    xoaCauHoiThi(a, 1, length);
-     xuatToanBoCauHoi(a, length);
+    mainmenu();
+
     return 0;
-}
+}	

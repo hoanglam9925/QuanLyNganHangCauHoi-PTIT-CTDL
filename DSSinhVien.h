@@ -10,7 +10,7 @@ struct SinhVien
     string maSv;
     string ho;
     string ten;
-    string gioiTinh;
+    string gioiTinh; // 0: nu, 1: nam
     string password;
     DiemThi *diem;
     SinhVien *next;
@@ -28,7 +28,7 @@ void initListSinhVien(ListSinhVien &l)
     l.tail = NULL;
 }
 
-void themSinhVien(ListSinhVien &l, SinhVien sv)
+void themSinhVien(ListSinhVien &l, SinhVien *sv)
 {
     if (l.head == NULL)
     {
@@ -43,7 +43,22 @@ void themSinhVien(ListSinhVien &l, SinhVien sv)
         l.tail = sv;
     }
 }
-
+SinhVien *taoSinhVien(string maSv, string ho, string ten, string gioiTinh, string pw)
+{
+    SinhVien *sv = new SinhVien;
+    if (sv == NULL)
+    {
+        cout << "Khong du bo nho" << endl;
+        return sv;
+    }
+    sv->maSv = maSv;
+    sv->ho = ho;
+    sv->ten = ten;
+    sv->gioiTinh = gioiTinh;
+    sv->password = pw;
+    sv->next = NULL;
+    return sv;
+}
 void xoaSinhVien(ListSinhVien &l, string maSv)
 {
     SinhVien *p = l.head;
@@ -67,10 +82,12 @@ void xoaSinhVien(ListSinhVien &l, string maSv)
         p = p->next;
     }
 }
-
+void kiemTraDoDai(ListSinhVien l);
 void xuatSinhVien(ListSinhVien l)
 {
     SinhVien *p = l.head;
+    cout << "Do dai danh sach: ";
+    kiemTraDoDai(l);
     while (p != NULL)
     {
         cout << p->maSv << " " << p->ho << " " << p->ten << " " << p->gioiTinh << " " << p->password << endl;
@@ -78,6 +95,17 @@ void xuatSinhVien(ListSinhVien l)
     }
 }
 
+void kiemTraDoDai(ListSinhVien l)
+{
+    int count = 0;
+    SinhVien *p = l.head;
+    while (p != NULL)
+    {
+        count++;
+        p = p->next;
+    }
+    cout << "So sinh vien: " << count << endl;
+}
 void nhapSinhVien(SinhVien &sv)
 {
     sv.maSv = nhapchuoi("Nhap ma sinh vien: ", 15);

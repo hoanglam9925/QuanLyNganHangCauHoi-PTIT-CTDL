@@ -29,7 +29,7 @@ void initListDiemThi(ListDiemThi &l)
     l.tail = NULL;
 }
 
-void themDiemThi(ListDiemThi &l, DiemThi dt)
+void themDiemThi(ListDiemThi &l, DiemThi *dt)
 {
     if (l.head == NULL)
     {
@@ -92,16 +92,16 @@ void suaDiemThi(ListDiemThi &l, string maSv, string maMon, int diem)
 
 void nhapDiemThi(ListDiemThi &l)
 {
-    DiemThi dt;
+    DiemThi *dt = new DiemThi;
     string maSv, maMon;
     int diem;
     maSv = nhapchuoi("Nhap ma sinh vien: ");
     maMon = nhapchuoi("Nhap ma mon: ");
     diem = nhapso("Nhap diem: ");
-    dt.sinhVien.maSv = maSv;
-    dt.sinhVien.diem = diem;
-    dt.sinhVien.maMon = maMon;
-    dt.maMon = maMon;
+    dt->sinhVien.maSv = maSv;
+    dt->sinhVien.diem = diem;
+    dt->sinhVien.maMon = maMon;
+    dt->maMon = maMon;
     themDiemThi(l, dt);
 }
 #endif

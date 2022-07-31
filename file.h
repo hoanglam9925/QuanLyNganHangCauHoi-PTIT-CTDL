@@ -2,27 +2,113 @@
 #define __FILE_H__
 #include <bits/stdc++.h>
 #include <fstream>
-using namespace std;
+#include <iostream>
+#include <string>
+#include "DSSinhVien.h"
+#include "DSMonHoc.h"
+#include "DSCauHoiThi.h"
+#include "DSDiemThi.h"
+#include "utils.h"
+#include "mylib.h"
 
-bool loginSV(string userName, string password)
+using namespace std;
+/*
+    @param: role: 1: giao vien, 2: sinh vien
+*/
+bool login(string userName, string password, int role)
 {
-    ifstream input("credentialStudent.txt");
+    if (role == 2)
+    {
+        ifstream input("DSSinhVien.txt");
+        if (!input)
+        {
+            cout << "Khong tim thay thong tin" << endl;
+            return false;
+        }
+        string fMaSV, fHo, fTen, fGioiTinh, fPassword, fLop;
+
+        while (!input.eof())
+        {
+            input >> fMaSV;
+            input >> fHo;
+            input >> fTen;
+            input >> fGioiTinh;
+            input >> fPassword;
+            input >> fLop;
+            if (fMaSV == userName && fPassword == password)
+            {
+                cout << "Dang nhap thanh cong" << endl;
+                return true;
+            }
+        }
+        return false;
+    }
+    else
+    {
+        ifstream input("credentialTeacher.txt");
+        if (!input)
+        {
+            cout << "Khong tim thay thong tin" << endl;
+            return false;
+        }
+        string fUserName, fPassword;
+        while (!input.eof())
+        {
+            input >> fUserName;
+            input >> fPassword;
+            if (fUserName == userName && fPassword == password)
+            {
+                cout << "Dang nhap thanh cong" << endl;
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+bool nhapLop(string maLop)
+{
+    ifstream input("DSLop.txt");
     if (!input)
     {
         cout << "Khong tim thay thong tin" << endl;
         return false;
     }
-    string fUserName, fPassword;
+    string fMaLop;
     while (!input.eof())
     {
-        input >> fUserName;
-        input >> fPassword;
-        if (fUserName == userName && fPassword == password)
+        input >> fMaLop;
+        if (fMaLop == maLop)
         {
-            cout << "Dang nhap thanh cong" << endl;
+            cout << "Nhap thanh cong" << endl;
             return true;
         }
     }
     return false;
+}
+
+void docFileSinhVien(ListSinhVien &lSinhVien, string maLop)
+{
+    ifstream input("DSSinhVien.txt");
+    if (!input)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    while (!input.eof())
+    {
+        string fMaSV, fHo, fTen, fGioiTinh, fPassword, fLop;
+        getline(input, fMaSV, '\n');
+        getline(input, fHo, '\n');
+        getline(input, fTen, '\n');
+        getline(input, fGioiTinh, '\n');
+        getline(input, fPassword, '\n');
+        getline(input, fLop, '\n');
+        if (fLop == maLop)
+        {
+            SinhVien *sv = taoSinhVien(fMaSV, fHo, fTen, fGioiTinh, fPassword);
+            themSinhVien(lSinhVien, sv);
+        }
+    }
 }
 #endif // __FILE_H__

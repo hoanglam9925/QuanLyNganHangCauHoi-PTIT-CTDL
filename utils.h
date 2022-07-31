@@ -31,7 +31,13 @@ string nhapchuoi(string msg = "", int maxLength = 999)
     string a;
     cout << msg;
     getline(cin, a);
-    a.resize(maxLength);
+    if (a.length() > maxLength)
+    {
+        cout << "Nhap khong duoc qua " << maxLength << " ky tu" << endl;
+        return nhapchuoi(msg, maxLength);
+    }
+    // a.resize(maxLength);
+    // cout << a << endl;
     return a;
 }
 #endif

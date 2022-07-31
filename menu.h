@@ -3,8 +3,13 @@
 #include "mylib.h"
 #include "file.h"
 #include "utils.h"
+#include "quanLySinhVien.h"
+
 using namespace std;
-bool dangNhap();
+bool dangNhap(int);
+void menuGV();
+void mainmenu();
+void menuSV();
 
 void mainmenu() // lua chon che do nguoi dung (giao vien/ sinh vien)
 {
@@ -27,17 +32,22 @@ void mainmenu() // lua chon che do nguoi dung (giao vien/ sinh vien)
         fflush(stdin);
         if (a == 1)
         {
-            if (dangNhap())
+            clrscr();
+            if (dangNhap(1))
             {
-//                menuGV();
+                menuGV();
             }
-            getchar();
+            else
+            {
+                cout << "Dang nhap that bai" << endl;
+                getchar();
+            }
         }
         if (a == 2)
         {
-            if (dangNhap())
+            if (dangNhap(2))
             {
-//                menuSV();
+                //                menuSV();
             }
             getchar();
         }
@@ -54,16 +64,46 @@ void menuSV()
 void menuGV()
 {
     clrscr();
+    bool isExit = false;
+    bool isExist = false;
+    while (!isExit)
+    {
+        clrscr();
+        gotoxy(35, 3);
+        cout << "CHUONG TRINH QUAN LY NGAN HANG CAU HOI" << endl;
+        gotoxy(35, 4);
+        cout << "1. Quan ly sinh vien" << endl;
+        gotoxy(35, 5);
+        cout << "2. Quan ly cau hoi" << endl;
+        gotoxy(35, 6);
+        cout << "3. Quan ly bang diem" << endl;
+        gotoxy(35, 7);
+        cout << "4. Thoat" << endl;
+        int a = nhapso("Chon chuc nang: ");
+        fflush(stdin);
+        if (a == 1)
+        {
+            clrscr();
+            quanLySv();
+        }
+        if (a == 2)
+        {
+        }
+        if (a == 3)
+        {
+        }
+        if (a == 4)
+        {
+            isExit = true;
+        }
+    }
 }
 
-bool dangNhap()
+bool dangNhap(int role)
 {
     string userName, password;
-    cout << "Nhap user name: ";
-    cin >> userName;
-    getchar();
-    cout << "Nhap password: ";
-    cin >> password;
-    return loginSV(userName, password);
+    userName = nhapchuoi("Nhap username: ");
+    password = nhapchuoi("Nhap mat khau: ");
+    return login(userName, password, role);
 }
 #endif // __MENU_H__
