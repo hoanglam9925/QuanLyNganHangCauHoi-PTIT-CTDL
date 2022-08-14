@@ -75,7 +75,7 @@ void quanLySv(DanhSachLop &llop)
             ten = nhapchuoi("Nhap ten sinh vien: ");
             gioiTinh = nhapchuoi("Nhap gioi tinh sinh vien: ");
             pw = nhapchuoi("Nhap password sinh vien: ");
-            SinhVien *sv = taoSinhVien(maSv, ho, ten, gioiTinh, pw);
+            SinhVien *sv = taoSinhVien(maSv, ho, ten, gioiTinh, pw, maLop);
             themSinhVien(lSinhVien, sv);
         }
         if (a == 2)

@@ -126,7 +126,7 @@ void docFileSinhVien(ListSinhVien &lSinhVien, string maLop)
         getline(input, fLop, '\n');
         if (fLop == maLop)
         {
-            SinhVien *sv = taoSinhVien(fMaSV, fHo, fTen, fGioiTinh, fPassword);
+            SinhVien *sv = taoSinhVien(fMaSV, fHo, fTen, fGioiTinh, fPassword, fLop);
             themSinhVien(lSinhVien, sv);
         }
     }
@@ -148,7 +148,7 @@ void docToanBoFileSinhVien(ListSinhVien &lSinhVien)
         getline(input, fGioiTinh, '\n');
         getline(input, fPassword, '\n');
         getline(input, fLop, '\n');
-        SinhVien *sv = taoSinhVien(fMaSV, fHo, fTen, fGioiTinh, fPassword);
+        SinhVien *sv = taoSinhVien(fMaSV, fHo, fTen, fGioiTinh, fPassword, fLop);
         themSinhVien(lSinhVien, sv);
     }
 }
@@ -157,6 +157,7 @@ void luuFileSinhVien(ListSinhVien lSinhVien, string maLop)
 {
     ListSinhVien tempLSV;
     initListSinhVien(tempLSV);
+    docToanBoFileSinhVien(tempLSV);
     capNhatDanhSachSinhVien(tempLSV, lSinhVien);
     // string temp = "DSSinhVien" + maLop + ".txt";
     // const char *filename = temp.c_str();
@@ -174,7 +175,7 @@ void luuFileSinhVien(ListSinhVien lSinhVien, string maLop)
         output << p->ten << endl;
         output << p->gioiTinh << endl;
         output << p->password << endl;
-        output << maLop << endl;
+        output << p->maLop << endl;
         p = p->next;
     }
 }
@@ -218,10 +219,10 @@ void luuFileLop(DanhSachLop lLop)
         // Tao file sinh vien neu chua co
         // string temp = "DSSinhVien" + lLop.lop[i].maLop + ".txt";
         // const char *filename = temp.c_str();
-        if (!checkFileExist("DSSinhVien.txt"))
-        {
-            createFile("DSSinhVien.txt");
-        }
+        // if (!checkFileExist("DSSinhVien.txt"))
+        // {
+        //     createFile("DSSinhVien.txt");
+        // }
         // luuFileSinhVien(lLop.l[i].lSinhVien, lLop.l[i].maLop);
     }
 }

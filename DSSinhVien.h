@@ -12,6 +12,7 @@ struct SinhVien
     string ten;
     string gioiTinh; // 0: nu, 1: nam
     string password;
+    string maLop;
     DiemThi *diem;
     SinhVien *next;
 };
@@ -45,7 +46,7 @@ void themSinhVien(ListSinhVien &l, SinhVien *sv)
     }
     // sapXepSinhVien(l);
 }
-SinhVien *taoSinhVien(string maSv, string ho, string ten, string gioiTinh, string pw)
+SinhVien *taoSinhVien(string maSv, string ho, string ten, string gioiTinh, string pw, string maLop)
 {
     SinhVien *sv = new SinhVien;
     if (sv == NULL)
@@ -58,6 +59,7 @@ SinhVien *taoSinhVien(string maSv, string ho, string ten, string gioiTinh, strin
     sv->ten = ten;
     sv->gioiTinh = gioiTinh;
     sv->password = pw;
+    sv->maLop = maLop;
     sv->next = NULL;
     return sv;
 }
