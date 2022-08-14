@@ -67,16 +67,16 @@ int themMonHocVaoDanhSachMonHoc(DanhSachMonHoc &root, NodeMonHoc *p)
 }
 void nhapMonHoc(DanhSachMonHoc &root)
 {
-    int n = nhapso("Nhap so luong mon hoc: ");
-    for (int i = 1; i <= n; i++)
-    {
-        string maMon, tenMon;
-        cout << "Nhap thong tin mon hoc thu " << i << endl;
-        maMon = nhapchuoi("Nhap ma mon: ", 15);
-        tenMon = nhapchuoi("Nhap ten mon: ");
-        NodeMonHoc *p = taoMonHocMoi(maMon, tenMon);
-        themMonHocVaoDanhSachMonHoc(root, p);
-    }
+    // int n = nhapso("Nhap so luong mon hoc: ");
+    // for (int i = 1; i <= n; i++)
+    // {
+    string maMon, tenMon;
+    cout << "Nhap thong tin mon hoc" << endl;
+    maMon = nhapchuoi("Nhap ma mon: ", 15);
+    tenMon = nhapchuoi("Nhap ten mon: ");
+    NodeMonHoc *p = taoMonHocMoi(maMon, tenMon);
+    themMonHocVaoDanhSachMonHoc(root, p);
+    // }
 }
 void xuatDanhSachMonHoc(DanhSachMonHoc root)
 {
@@ -182,4 +182,13 @@ void xoaMonHocTrongDanhSach(DanhSachMonHoc &root, string maMon)
 //         cout << "Khong tim thay mon hoc" << endl;
 //     }
 
+void taoMonHoc(DanhSachMonHoc &root, string maMon, string tenMon)
+{
+    NodeMonHoc *p = taoMonHocMoi(maMon, tenMon);
+    themMonHocVaoDanhSachMonHoc(root, p);
+}
+void suaMonHoc(NodeMonHoc *p, string tenMon)
+{
+    p->tenMon = tenMon;
+}
 #endif

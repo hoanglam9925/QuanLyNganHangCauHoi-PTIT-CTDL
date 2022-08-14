@@ -226,4 +226,46 @@ void luuFileLop(DanhSachLop lLop)
         // luuFileSinhVien(lLop.l[i].lSinhVien, lLop.l[i].maLop);
     }
 }
+
+void docFileMonHoc(DanhSachMonHoc &lMonHoc)
+{
+    ifstream input("DSMonHoc.txt");
+    if (!input)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    while (!input.eof())
+    {
+        string fMaMonHoc, fTenMonHoc, fSoTinChi;
+        getline(input, fMaMonHoc, '\n');
+        getline(input, fTenMonHoc, '\n');
+        if (fMaMonHoc != "")
+        {
+            taoMonHoc(lMonHoc, fMaMonHoc, fTenMonHoc);
+            // TODO: them cau hoi thi
+        }
+    }
+}
+
+void scan(DanhSachMonHoc lMonHoc, ofstream &output)
+{
+    if (lMonHoc != NULL)
+    {
+        output << lMonHoc->maMon << endl;
+        output << lMonHoc->tenMon << endl;
+        scan(lMonHoc->left, output);
+        scan(lMonHoc->right, output);
+    }
+}
+void luuFileMonHoc(DanhSachMonHoc lMonHoc)
+{
+    ofstream output("DSMonHoc.txt");
+    if (!output)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    scan(lMonHoc, output);
+}
 #endif // __FILE_H__

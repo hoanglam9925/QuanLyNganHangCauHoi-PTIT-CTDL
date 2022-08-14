@@ -4,6 +4,7 @@
 #include "file.h"
 #include "utils.h"
 #include "quanLySinhVien.h"
+#include "quanLyMonHoc.h"
 
 using namespace std;
 bool dangNhap(int);
@@ -69,6 +70,11 @@ void menuGV()
     DanhSachLop llop;
     khoiTaoDanhSachLop(llop);
     docFileLop(llop);
+
+    DanhSachMonHoc lMonHoc;
+    khoiTaoDanhSachMonHoc(lMonHoc);
+    docFileMonHoc(lMonHoc);
+
     while (!isExit)
     {
     loop:
@@ -80,11 +86,13 @@ void menuGV()
         gotoxy(35, 5);
         cout << "2. Quan ly sinh vien" << endl;
         gotoxy(35, 6);
-        cout << "3. Quan ly cau hoi" << endl;
+        cout << "3. Quan ly mon hoc" << endl;
         gotoxy(35, 7);
-        cout << "4. Quan ly bang diem" << endl;
+        cout << "4. Quan ly cau hoi" << endl;
         gotoxy(35, 8);
-        cout << "5. Thoat" << endl;
+        cout << "5. Quan ly bang diem" << endl;
+        gotoxy(35, 9);
+        cout << "6. Thoat" << endl;
         int a = nhapso("Chon chuc nang: ");
         fflush(stdin);
         if (a == 1)
@@ -126,11 +134,16 @@ void menuGV()
         }
         if (a == 3)
         {
+            clrscr();
+            quanLyMonHoc(lMonHoc);
         }
         if (a == 4)
         {
         }
         if (a == 5)
+        {
+        }
+        if (a == 6)
         {
             isExit = true;
         }
