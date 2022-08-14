@@ -10,6 +10,7 @@
 #include "DSDiemThi.h"
 #include "utils.h"
 #include "mylib.h"
+#include <cstring>
 
 using namespace std;
 /*
@@ -89,7 +90,9 @@ bool nhapLop(string maLop)
 
 void docFileSinhVien(ListSinhVien &lSinhVien, string maLop)
 {
-    ifstream input("DSSinhVien.txt");
+	string temp = "DSSinhVien" + maLop + ".txt";
+	const char * filename = temp.c_str();
+    ifstream input(filename);
     if (!input)
     {
         cout << "Khong tim thay thong tin" << endl;
@@ -109,6 +112,28 @@ void docFileSinhVien(ListSinhVien &lSinhVien, string maLop)
             SinhVien *sv = taoSinhVien(fMaSV, fHo, fTen, fGioiTinh, fPassword);
             themSinhVien(lSinhVien, sv);
         }
+    }
+}
+void luuFileSinhVien(ListSinhVien lSinhVien, string maLop)
+{
+	string temp = "DSSinhVien" + maLop + ".txt";
+	const char * filename = temp.c_str();
+    ofstream output(filename);
+    if (!output)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    SinhVien *p = lSinhVien.head;
+    while (p != NULL)
+    {
+        output << p->maSv << endl;
+        output << p->ho << endl;
+        output << p->ten << endl;
+        output << p->gioiTinh << endl;
+        output << p->password << endl;
+        output << maLop << endl;
+        p = p->next;
     }
 }
 #endif // __FILE_H__

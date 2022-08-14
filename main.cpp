@@ -5,12 +5,12 @@
 #include "DSMonHoc.h"
 #include "utils.h"
 #include "DSCauHoiThi.h"
+#include "DSSinhVien.h"
 
 using namespace std;
 
 int main()
 {
     mainmenu();
-
     return 0;
-}	
+}

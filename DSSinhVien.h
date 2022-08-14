@@ -28,20 +28,20 @@ void initListSinhVien(ListSinhVien &l)
     l.tail = NULL;
 }
 
+void sapXepSinhVien(ListSinhVien &l);
 void themSinhVien(ListSinhVien &l, SinhVien *sv)
 {
     if (l.head == NULL)
     {
-        l.head = new SinhVien;
         l.head = sv;
         l.tail = l.head;
     }
     else
     {
-        l.tail->next = new SinhVien;
-        l.tail = l.tail->next;
+        l.tail->next = sv;
         l.tail = sv;
     }
+    sapXepSinhVien(l);
 }
 SinhVien *taoSinhVien(string maSv, string ho, string ten, string gioiTinh, string pw)
 {
@@ -82,18 +82,6 @@ void xoaSinhVien(ListSinhVien &l, string maSv)
         p = p->next;
     }
 }
-void kiemTraDoDai(ListSinhVien l);
-void xuatSinhVien(ListSinhVien l)
-{
-    SinhVien *p = l.head;
-    cout << "Do dai danh sach: ";
-    kiemTraDoDai(l);
-    while (p != NULL)
-    {
-        cout << p->maSv << " " << p->ho << " " << p->ten << " " << p->gioiTinh << " " << p->password << endl;
-        p = p->next;
-    }
-}
 
 void kiemTraDoDai(ListSinhVien l)
 {
@@ -106,9 +94,20 @@ void kiemTraDoDai(ListSinhVien l)
     }
     cout << "So sinh vien: " << count << endl;
 }
+void xuatSinhVien(ListSinhVien l)
+{
+    SinhVien *p = l.head;
+    cout << "Do dai danh sach: ";
+    kiemTraDoDai(l);
+    while (p != NULL)
+    {
+        cout << p->maSv << " " << p->ho << " " << p->ten << " " << p->gioiTinh << " " << p->password << endl;
+        p = p->next;
+    }
+}
 void nhapSinhVien(SinhVien &sv)
 {
-    sv.maSv = nhapchuoi("Nhap ma sinh vien: ", 15);
+    // sv.maSv = nhapchuoi("Nhap ma sinh vien: ", 15);
     sv.ho = nhapchuoi("Nhap ho sinh vien: ");
     sv.ten = nhapchuoi("Nhap ten sinh vien: ");
     sv.gioiTinh = nhapchuoi("Nhap gioi tinh sinh vien: ");
@@ -128,4 +127,41 @@ void suaSinhVien(ListSinhVien &l, string maSv)
         p = p->next;
     }
 }
+
+bool kiemTraMaSv(ListSinhVien l, string maSv)
+{
+    SinhVien *p = l.head;
+    while (p != NULL)
+    {
+        if (p->maSv == maSv)
+        {
+            return true;
+        }
+        p = p->next;
+    }
+    return false;
+}
+
+void sapXepSinhVien(ListSinhVien &l)
+{
+    SinhVien *p = l.head;
+    while (p != NULL)
+    {
+        SinhVien *q = p->next;
+        while (q != NULL)
+        {
+            if (p->maSv > q->maSv)
+            {
+                swap(p->maSv, q->maSv);
+                swap(p->ho, q->ho);
+                swap(p->ten, q->ten);
+                swap(p->gioiTinh, q->gioiTinh);
+                swap(p->password, q->password);
+            }
+            q = q->next;
+        }
+        p = p->next;
+    }
+}
+
 #endif
