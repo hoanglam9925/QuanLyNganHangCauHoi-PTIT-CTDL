@@ -27,10 +27,12 @@ void initListSinhVien(ListSinhVien &l)
     l.head = NULL;
     l.tail = NULL;
 }
-
+int kiemTraDoDai(ListSinhVien l);
 void sapXepSinhVien(ListSinhVien &l);
 void themSinhVien(ListSinhVien &l, SinhVien *sv)
 {
+    if (kiemTraDoDai == 0)
+        initListSinhVien(l);
     if (l.head == NULL)
     {
         l.head = sv;
@@ -41,7 +43,7 @@ void themSinhVien(ListSinhVien &l, SinhVien *sv)
         l.tail->next = sv;
         l.tail = sv;
     }
-    sapXepSinhVien(l);
+    // sapXepSinhVien(l);
 }
 SinhVien *taoSinhVien(string maSv, string ho, string ten, string gioiTinh, string pw)
 {
@@ -83,7 +85,7 @@ void xoaSinhVien(ListSinhVien &l, string maSv)
     }
 }
 
-void kiemTraDoDai(ListSinhVien l)
+int kiemTraDoDai(ListSinhVien l)
 {
     int count = 0;
     SinhVien *p = l.head;
@@ -93,6 +95,7 @@ void kiemTraDoDai(ListSinhVien l)
         p = p->next;
     }
     cout << "So sinh vien: " << count << endl;
+    return count;
 }
 void xuatSinhVien(ListSinhVien l)
 {

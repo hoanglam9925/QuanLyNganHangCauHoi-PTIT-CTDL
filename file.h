@@ -11,6 +11,10 @@
 #include "utils.h"
 #include "mylib.h"
 #include <cstring>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string>
+#include <fstream>
 
 using namespace std;
 /*
@@ -88,10 +92,26 @@ bool nhapLop(string maLop)
     return false;
 }
 
+bool checkFileExist(string fileName)
+{
+    struct stat buffer;
+    return (stat(fileName.c_str(), &buffer) == 0);
+}
+
+void createFile(string fileName)
+{
+    ofstream output(fileName.c_str());
+    output.close();
+}
+
 void docFileSinhVien(ListSinhVien &lSinhVien, string maLop)
 {
-	string temp = "DSSinhVien" + maLop + ".txt";
-	const char * filename = temp.c_str();
+    string temp = "DSSinhVien" + maLop + ".txt";
+    const char *filename = temp.c_str();
+    if (!checkFileExist(filename))
+    {
+        createFile(filename);
+    }
     ifstream input(filename);
     if (!input)
     {
@@ -116,8 +136,13 @@ void docFileSinhVien(ListSinhVien &lSinhVien, string maLop)
 }
 void luuFileSinhVien(ListSinhVien lSinhVien, string maLop)
 {
-	string temp = "DSSinhVien" + maLop + ".txt";
-	const char * filename = temp.c_str();
+    string temp = "DSSinhVien" + maLop + ".txt";
+    const char *filename = temp.c_str();
+
+    if (!checkFileExist(filename))
+    {
+        createFile(filename);
+    }
     ofstream output(filename);
     if (!output)
     {

@@ -23,6 +23,7 @@ void quanLySv()
 
     while (!isExit)
     {
+    loop:
         clrscr();
         gotoxy(35, 3);
         cout << "CHUONG TRINH QUAN LY NGAN HANG CAU HOI" << endl;
@@ -40,7 +41,6 @@ void quanLySv()
         fflush(stdin);
         if (a == 1)
         {
-            SinhVien *sv = new SinhVien;
             string maSv, ho, ten, gioiTinh, pw;
             while (true)
             {
@@ -49,6 +49,10 @@ void quanLySv()
                 {
                     cout << "Ma sinh vien da ton tai" << endl;
                     continue;
+                }
+                else if (maSv == "")
+                {
+                    goto loop;
                 }
                 else
                 {
@@ -59,11 +63,7 @@ void quanLySv()
             ten = nhapchuoi("Nhap ten sinh vien: ");
             gioiTinh = nhapchuoi("Nhap gioi tinh sinh vien: ");
             pw = nhapchuoi("Nhap password sinh vien: ");
-            sv->maSv = maSv;
-            sv->ho = ho;
-            sv->ten = ten;
-            sv->gioiTinh = gioiTinh;
-            sv->password = pw;
+            SinhVien *sv = taoSinhVien(maSv, ho, ten, gioiTinh, pw);
             themSinhVien(lSinhVien, sv);
         }
         if (a == 2)
@@ -75,6 +75,10 @@ void quanLySv()
                 if (kiemTraMaSv(lSinhVien, maSv))
                 {
                     break;
+                }
+                else if (maSv == "")
+                {
+                    goto loop;
                 }
                 else
                 {
@@ -93,6 +97,10 @@ void quanLySv()
                 if (kiemTraMaSv(lSinhVien, maSv))
                 {
                     break;
+                }
+                else if (maSv == "")
+                {
+                    goto loop;
                 }
                 else
                 {
