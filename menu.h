@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "quanLySinhVien.h"
 #include "quanLyMonHoc.h"
+#include "quanLyCauHoi.h"
 
 using namespace std;
 bool dangNhap(int);
@@ -139,6 +140,8 @@ void menuGV()
         }
         if (a == 4)
         {
+            clrscr();
+            quanLyCauHoi(lMonHoc);
         }
         if (a == 5)
         {

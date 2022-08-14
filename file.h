@@ -16,6 +16,7 @@
 #include <string>
 #include <fstream>
 #include "DSLop.h"
+#include "DSCauHoiThi.h"
 
 using namespace std;
 /*
@@ -227,27 +228,6 @@ void luuFileLop(DanhSachLop lLop)
     }
 }
 
-void docFileMonHoc(DanhSachMonHoc &lMonHoc)
-{
-    ifstream input("DSMonHoc.txt");
-    if (!input)
-    {
-        cout << "Khong tim thay thong tin" << endl;
-        return;
-    }
-    while (!input.eof())
-    {
-        string fMaMonHoc, fTenMonHoc, fSoTinChi;
-        getline(input, fMaMonHoc, '\n');
-        getline(input, fTenMonHoc, '\n');
-        if (fMaMonHoc != "")
-        {
-            taoMonHoc(lMonHoc, fMaMonHoc, fTenMonHoc);
-            // TODO: them cau hoi thi
-        }
-    }
-}
-
 void scan(DanhSachMonHoc lMonHoc, ofstream &output)
 {
     if (lMonHoc != NULL)
@@ -267,5 +247,79 @@ void luuFileMonHoc(DanhSachMonHoc lMonHoc)
         return;
     }
     scan(lMonHoc, output);
+}
+int docFileCauHoi(CauHoiThi cauHoiThi[], string maMon)
+{
+    ifstream input("DSCauHoi.txt");
+    if (!input)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return -1;
+    }
+    int i = 0;
+    while (!input.eof())
+    {
+        string fMaMon, fNoiDungCauHoi, fDapAnA, fDapAnB, fDapAnC, fDapAnD, fDapAnDung;
+        getline(input, fNoiDungCauHoi, '\n');
+        getline(input, fDapAnA, '\n');
+        getline(input, fDapAnB, '\n');
+        getline(input, fDapAnC, '\n');
+        getline(input, fDapAnD, '\n');
+        getline(input, fDapAnDung, '\n');
+        // string to int
+        int dapAnDung = atoi(fDapAnDung.c_str());
+        getline(input, fMaMon, '\n');
+        if (fMaMon == maMon)
+        {
+            cauHoiThi[i].noiDung = fNoiDungCauHoi;
+            cauHoiThi[i].a = fDapAnA;
+            cauHoiThi[i].b = fDapAnB;
+            cauHoiThi[i].c = fDapAnC;
+            cauHoiThi[i].d = fDapAnD;
+            cauHoiThi[i].dapAn = dapAnDung;
+            i++;
+        }
+    }
+    return i;
+}
+void luuFileCauHoiThi(CauHoiThi cauHoiThi[], string maMon, int n)
+{
+    ofstream output("DSCauHoi.txt");
+    if (!output)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        output << cauHoiThi[i].noiDung << endl;
+        output << cauHoiThi[i].a << endl;
+        output << cauHoiThi[i].b << endl;
+        output << cauHoiThi[i].c << endl;
+        output << cauHoiThi[i].d << endl;
+        output << cauHoiThi[i].dapAn << endl;
+        output << maMon << endl;
+    }
+}
+void docFileMonHoc(DanhSachMonHoc &lMonHoc)
+{
+    ifstream input("DSMonHoc.txt");
+    if (!input)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    while (!input.eof())
+    {
+        string fMaMonHoc, fTenMonHoc, fSoTinChi;
+        getline(input, fMaMonHoc, '\n');
+        getline(input, fTenMonHoc, '\n');
+        if (fMaMonHoc != "")
+        {
+            CauHoiThi cauHoiThi[200];
+            int length = docFileCauHoi(cauHoiThi, fMaMonHoc);
+            taoMonHoc(lMonHoc, fMaMonHoc, fTenMonHoc, cauHoiThi, length);
+        }
+    }
 }
 #endif // __FILE_H__

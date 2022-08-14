@@ -182,10 +182,18 @@ void xoaMonHocTrongDanhSach(DanhSachMonHoc &root, string maMon)
 //         cout << "Khong tim thay mon hoc" << endl;
 //     }
 
-void taoMonHoc(DanhSachMonHoc &root, string maMon, string tenMon)
+void taoMonHoc(DanhSachMonHoc &root, string maMon, string tenMon, CauHoiThi cauHoiThi[], int length)
 {
     NodeMonHoc *p = taoMonHocMoi(maMon, tenMon);
-    themMonHocVaoDanhSachMonHoc(root, p);
+    if (p != NULL)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            p->cauHoiThi[i] = cauHoiThi[i];
+        }
+        p->length = length;
+        themMonHocVaoDanhSachMonHoc(root, p);
+    }
 }
 void suaMonHoc(NodeMonHoc *p, string tenMon)
 {

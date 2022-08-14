@@ -90,6 +90,30 @@ void xuatToanBoCauHoi(CauHoiThi cauHoiThi[], int length)
     }
 }
 
+void suaCauHoi(CauHoiThi cauHoiThi[], int index)
+{
+    clrscr();
+    cout << "Noi dung cau hoi: " << cauHoiThi[index].noiDung << endl;
+    cout << "A: " << cauHoiThi[index].a << endl;
+    cout << "B: " << cauHoiThi[index].b << endl;
+    cout << "C: " << cauHoiThi[index].c << endl;
+    cout << "D: " << cauHoiThi[index].d << endl;
+    cout << "Dap an: " << cauHoiThi[index].dapAn << endl;
+    fflush(stdin);
+    string noiDung = nhapchuoi("Nhap noi dung cau hoi: ");
+    string dapAnA = nhapchuoi("Nhap dap an A: ");
+    string dapAnB = nhapchuoi("Nhap dap an B: ");
+    string dapAnC = nhapchuoi("Nhap dap an C: ");
+    string dapAnD = nhapchuoi("Nhap dap an D: ");
+    int dapAn = nhapso("Nhap dap an: ");
+    cauHoiThi[index].noiDung = noiDung;
+    cauHoiThi[index].a = dapAnA;
+    cauHoiThi[index].b = dapAnB;
+    cauHoiThi[index].c = dapAnC;
+    cauHoiThi[index].d = dapAnD;
+    cauHoiThi[index].dapAn = dapAn;
+}
+
 // CauHoiThi a[200];
 //     int length = 0;
 //     themCauHoiThi(a, length);
