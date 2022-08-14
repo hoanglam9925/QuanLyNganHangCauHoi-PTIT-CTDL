@@ -78,4 +78,16 @@ void taoLop(DanhSachLop &llop, string maLop, string tenLop, ListSinhVien &l)
     themLop(llop, lop);
 }
 
+bool kiemTraMaLop(DanhSachLop ds, string maLop)
+{
+    for (int i = 0; i < ds.length; i++)
+    {
+        if (ds.lop[i].maLop == maLop)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 #endif // __DS_LOP_H__

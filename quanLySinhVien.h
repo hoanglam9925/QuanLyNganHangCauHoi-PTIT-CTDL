@@ -48,18 +48,24 @@ void quanLySv(DanhSachLop &llop)
         if (a == 1)
         {
             string maSv, ho, ten, gioiTinh, pw;
+
+            ListSinhVien allFileSinhVien;
+            initListSinhVien(allFileSinhVien);
+            docToanBoFileSinhVien(allFileSinhVien);
+
             while (true)
             {
                 maSv = nhapchuoi("Nhap ma sinh vien: ", 15);
-                if (kiemTraMaSv(lSinhVien, maSv))
+                if (maSv == "")
+                {
+                    goto loop;
+                }
+                if (kiemTraMaSv(lSinhVien, maSv) || kiemTraMaSv(allFileSinhVien, maSv))
                 {
                     cout << "Ma sinh vien da ton tai" << endl;
                     continue;
                 }
-                else if (maSv == "")
-                {
-                    goto loop;
-                }
+
                 else
                 {
                     break;
@@ -88,7 +94,7 @@ void quanLySv(DanhSachLop &llop)
                 }
                 else
                 {
-                    cout << "Ma sinh vien khong ton tai" << endl;
+                    cout << "Ma sinh vien khong ton tai hoac khong trong lop nay" << endl;
                     continue;
                 }
             }
@@ -110,7 +116,7 @@ void quanLySv(DanhSachLop &llop)
                 }
                 else
                 {
-                    cout << "Ma sinh vien khong ton tai" << endl;
+                    cout << "Ma sinh vien khong ton tai hoac khong trong lop nay" << endl;
                     continue;
                 }
             }

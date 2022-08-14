@@ -166,5 +166,36 @@ void sapXepSinhVien(ListSinhVien &l)
         p = p->next;
     }
 }
-
+void capNhatSinhVien(SinhVien *sv, string ho, string ten, string gt, string pw)
+{
+    sv->ho = ho;
+    sv->ten = ten;
+    sv->gioiTinh = gt;
+    sv->password = pw;
+}
+void capNhatDanhSachSinhVien(ListSinhVien &old, ListSinhVien newList)
+{
+    SinhVien *p = newList.head;
+    while (p != NULL)
+    {
+        if (kiemTraMaSv(old, p->maSv) == false)
+        {
+            themSinhVien(old, p);
+        }
+        else
+        {
+            SinhVien *q = old.head;
+            while (q != NULL)
+            {
+                if (q->maSv == p->maSv)
+                {
+                    capNhatSinhVien(q, p->ho, p->ten, p->gioiTinh, p->password);
+                    break;
+                }
+                q = q->next;
+            }
+        }
+        p = p->next;
+    }
+}
 #endif

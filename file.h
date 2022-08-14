@@ -107,13 +107,9 @@ void createFile(string fileName)
 
 void docFileSinhVien(ListSinhVien &lSinhVien, string maLop)
 {
-    string temp = "DSSinhVien" + maLop + ".txt";
-    const char *filename = temp.c_str();
-    if (!checkFileExist(filename))
-    {
-        createFile(filename);
-    }
-    ifstream input(filename);
+    // string temp = "DSSinhVien" + maLop + ".txt";
+    // const char *filename = temp.c_str();
+    ifstream input("DSSinhVien.txt");
     if (!input)
     {
         cout << "Khong tim thay thong tin" << endl;
@@ -135,22 +131,42 @@ void docFileSinhVien(ListSinhVien &lSinhVien, string maLop)
         }
     }
 }
+void docToanBoFileSinhVien(ListSinhVien &lSinhVien)
+{
+    ifstream input("DSSinhVien.txt");
+    if (!input)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    while (!input.eof())
+    {
+        string fMaSV, fHo, fTen, fGioiTinh, fPassword, fLop;
+        getline(input, fMaSV, '\n');
+        getline(input, fHo, '\n');
+        getline(input, fTen, '\n');
+        getline(input, fGioiTinh, '\n');
+        getline(input, fPassword, '\n');
+        getline(input, fLop, '\n');
+        SinhVien *sv = taoSinhVien(fMaSV, fHo, fTen, fGioiTinh, fPassword);
+        themSinhVien(lSinhVien, sv);
+    }
+}
+
 void luuFileSinhVien(ListSinhVien lSinhVien, string maLop)
 {
-    string temp = "DSSinhVien" + maLop + ".txt";
-    const char *filename = temp.c_str();
-
-    if (!checkFileExist(filename))
-    {
-        createFile(filename);
-    }
-    ofstream output(filename);
+    ListSinhVien tempLSV;
+    initListSinhVien(tempLSV);
+    capNhatDanhSachSinhVien(tempLSV, lSinhVien);
+    // string temp = "DSSinhVien" + maLop + ".txt";
+    // const char *filename = temp.c_str();
+    ofstream output("DSSinhVien.txt");
     if (!output)
     {
         cout << "Khong tim thay thong tin" << endl;
         return;
     }
-    SinhVien *p = lSinhVien.head;
+    SinhVien *p = tempLSV.head;
     while (p != NULL)
     {
         output << p->maSv << endl;
@@ -183,6 +199,30 @@ void docFileLop(DanhSachLop &lLop)
             docFileSinhVien(lSinhVien, fMaLop);
             taoLop(lLop, fMaLop, fTenLop, lSinhVien);
         }
+    }
+}
+void luuFileLop(DanhSachLop lLop)
+{
+    ofstream output("DSLop.txt");
+    if (!output)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    for (int i = 0; i < lLop.length; i++)
+    {
+
+        output << lLop.lop[i].maLop << endl;
+        output << lLop.lop[i].tenLop << endl;
+
+        // Tao file sinh vien neu chua co
+        // string temp = "DSSinhVien" + lLop.lop[i].maLop + ".txt";
+        // const char *filename = temp.c_str();
+        if (!checkFileExist("DSSinhVien.txt"))
+        {
+            createFile("DSSinhVien.txt");
+        }
+        // luuFileSinhVien(lLop.l[i].lSinhVien, lLop.l[i].maLop);
     }
 }
 #endif // __FILE_H__

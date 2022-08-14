@@ -71,6 +71,7 @@ void menuGV()
     docFileLop(llop);
     while (!isExit)
     {
+    loop:
         clrscr();
         gotoxy(35, 3);
         cout << "CHUONG TRINH QUAN LY NGAN HANG CAU HOI" << endl;
@@ -88,6 +89,35 @@ void menuGV()
         fflush(stdin);
         if (a == 1)
         {
+            string maLop, tenLop;
+            while (true)
+            {
+                maLop = nhapchuoi("Nhap ma lop: ", 15);
+                if (kiemTraMaLop(llop, maLop))
+                {
+                    cout << "Ma lop da ton tai" << endl;
+                    continue;
+                }
+                else if (maLop == "")
+                {
+                    goto loop;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            tenLop = nhapchuoi("Nhap ten lop: ");
+            ListSinhVien lsv;
+            initListSinhVien(lsv);
+            string temp = "DSSinhVien" + maLop + ".txt";
+            const char *filename = temp.c_str();
+            if (!checkFileExist(filename))
+            {
+                createFile(filename);
+            }
+            taoLop(llop, maLop, tenLop, lsv);
+            luuFileLop(llop);
         }
         if (a == 2)
         {

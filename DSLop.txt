@@ -1,4 +1,4 @@
-D17
-d17xx
-D18
-d18xx
+D17DT
+D17 Dien tu
+D18DT
+Dien tu D18
