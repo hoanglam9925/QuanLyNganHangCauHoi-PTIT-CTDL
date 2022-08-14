@@ -5,8 +5,9 @@
 #include "file.h"
 #include "utils.h"
 #include "DSSinhVien.h"
+#include "DSLop.h"
 
-void quanLySv()
+void quanLySv(DanhSachLop &llop)
 {
     clrscr();
     bool isExit = false;
@@ -17,10 +18,15 @@ void quanLySv()
     while (!isExist)
     {
         maLop = nhapchuoi("Nhap ma lop: ");
-        isExist = nhapLop(maLop);
+        // isExist = nhapLop(maLop);
+        int index = timIndexLop(llop, maLop);
+        if (index != -1)
+        {
+            isExist = true;
+            lSinhVien = llop.lop[index].listSinhVien;
+        }
     }
-    docFileSinhVien(lSinhVien, maLop);
-
+    // docFileSinhVien(lSinhVien, maLop);
     while (!isExit)
     {
     loop:

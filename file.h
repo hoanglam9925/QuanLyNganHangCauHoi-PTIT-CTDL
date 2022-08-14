@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <string>
 #include <fstream>
+#include "DSLop.h"
 
 using namespace std;
 /*
@@ -159,6 +160,29 @@ void luuFileSinhVien(ListSinhVien lSinhVien, string maLop)
         output << p->password << endl;
         output << maLop << endl;
         p = p->next;
+    }
+}
+
+void docFileLop(DanhSachLop &lLop)
+{
+    ifstream input("DSLop.txt");
+    if (!input)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    while (!input.eof())
+    {
+        string fMaLop, fTenLop;
+        getline(input, fMaLop, '\n');
+        getline(input, fTenLop, '\n');
+        if (fMaLop != "")
+        {
+            ListSinhVien lSinhVien;
+            initListSinhVien(lSinhVien);
+            docFileSinhVien(lSinhVien, fMaLop);
+            taoLop(lLop, fMaLop, fTenLop, lSinhVien);
+        }
     }
 }
 #endif // __FILE_H__

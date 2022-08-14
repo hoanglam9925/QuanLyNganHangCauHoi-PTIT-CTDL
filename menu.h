@@ -66,33 +66,41 @@ void menuGV()
     clrscr();
     bool isExit = false;
     bool isExist = false;
+    DanhSachLop llop;
+    khoiTaoDanhSachLop(llop);
+    docFileLop(llop);
     while (!isExit)
     {
         clrscr();
         gotoxy(35, 3);
         cout << "CHUONG TRINH QUAN LY NGAN HANG CAU HOI" << endl;
         gotoxy(35, 4);
-        cout << "1. Quan ly sinh vien" << endl;
+        cout << "1. Them lop" << endl;
         gotoxy(35, 5);
-        cout << "2. Quan ly cau hoi" << endl;
+        cout << "2. Quan ly sinh vien" << endl;
         gotoxy(35, 6);
-        cout << "3. Quan ly bang diem" << endl;
+        cout << "3. Quan ly cau hoi" << endl;
         gotoxy(35, 7);
-        cout << "4. Thoat" << endl;
+        cout << "4. Quan ly bang diem" << endl;
+        gotoxy(35, 8);
+        cout << "5. Thoat" << endl;
         int a = nhapso("Chon chuc nang: ");
         fflush(stdin);
         if (a == 1)
         {
-            clrscr();
-            quanLySv();
         }
         if (a == 2)
         {
+            clrscr();
+            quanLySv(llop);
         }
         if (a == 3)
         {
         }
         if (a == 4)
+        {
+        }
+        if (a == 5)
         {
             isExit = true;
         }

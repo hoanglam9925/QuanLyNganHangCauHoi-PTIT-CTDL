@@ -48,6 +48,18 @@ void xoaLop(DanhSachLop &ds, string maLop)
     }
 }
 
+int timIndexLop(DanhSachLop ds, string maLop)
+{
+    for (int i = 0; i < ds.length; i++)
+    {
+        if (ds.lop[i].maLop == maLop)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 Lop nhapLop(ListSinhVien &l)
 {
     Lop lop;
@@ -55,6 +67,15 @@ Lop nhapLop(ListSinhVien &l)
     lop.tenLop = nhapchuoi("Nhap ten lop: ");
     lop.listSinhVien = l;
     return lop;
+}
+
+void taoLop(DanhSachLop &llop, string maLop, string tenLop, ListSinhVien &l)
+{
+    Lop lop;
+    lop.maLop = maLop;
+    lop.tenLop = tenLop;
+    lop.listSinhVien = l;
+    themLop(llop, lop);
 }
 
 #endif // __DS_LOP_H__
