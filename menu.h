@@ -91,10 +91,6 @@ void menuGV()
     initListDiemThi(lDiemThi);
     docFileDiemThi(lDiemThi);
 
-    ListSinhVien lSinhVien;
-    initListSinhVien(lSinhVien);
-    docToanBoFileSinhVien(lSinhVien);
-
     while (!isExit)
     {
     loop:
@@ -166,6 +162,8 @@ void menuGV()
         {
             clrscr();
             string maLop, maMonHoc;
+            ListSinhVien lSinhVien;
+            initListSinhVien(lSinhVien);
             while (true)
             {
                 clrscr();
@@ -190,6 +188,8 @@ void menuGV()
                     cout << "Ma mon hoc khong ton tai" << endl;
                     continue;
                 }
+                docFileSinhVien(lSinhVien, maLop);
+
                 xuatBangDiemTheoLop(lDiemThi, lSinhVien, maLop, maMonHoc);
                 getchar();
             }
