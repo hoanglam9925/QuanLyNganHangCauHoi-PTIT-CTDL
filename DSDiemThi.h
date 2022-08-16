@@ -2,7 +2,6 @@
 #define __DS_DIEM_THI__
 #include <bits/stdc++.h>
 #include "utils.h"
-
 struct DiemSinhVien
 {
     string maSv;
@@ -112,4 +111,5 @@ void taoDiemThi(ListDiemThi &l, string maSv, string maMon, float diem)
     dt->maMon = maMon;
     themDiemThi(l, dt);
 }
+
 #endif

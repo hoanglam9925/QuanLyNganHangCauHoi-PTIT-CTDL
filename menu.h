@@ -7,6 +7,7 @@
 #include "quanLyMonHoc.h"
 #include "quanLyCauHoi.h"
 #include "DSDiemThi.h"
+#include "quanLyBangDiem.h"
 #include <ctime>
 
 using namespace std;
@@ -86,6 +87,14 @@ void menuGV()
     khoiTaoDanhSachMonHoc(lMonHoc);
     docFileMonHoc(lMonHoc);
 
+    ListDiemThi lDiemThi;
+    initListDiemThi(lDiemThi);
+    docFileDiemThi(lDiemThi);
+
+    ListSinhVien lSinhVien;
+    initListSinhVien(lSinhVien);
+    docToanBoFileSinhVien(lSinhVien);
+
     while (!isExit)
     {
     loop:
@@ -101,7 +110,7 @@ void menuGV()
         gotoxy(35, 7);
         cout << "4. Quan ly cau hoi" << endl;
         gotoxy(35, 8);
-        cout << "5. Quan ly bang diem" << endl;
+        cout << "5. Xuat bang diem" << endl;
         gotoxy(35, 9);
         cout << "6. Thoat" << endl;
         int a = nhapso("Chon chuc nang: ");
@@ -155,6 +164,35 @@ void menuGV()
         }
         if (a == 5)
         {
+            clrscr();
+            string maLop, maMonHoc;
+            while (true)
+            {
+                clrscr();
+                maLop = nhapchuoi("Nhap ma lop: ", 15);
+                maMonHoc = nhapchuoi("Nhap ma mon hoc: ", 15);
+                if (maLop == "")
+                {
+                    goto loop;
+                }
+                else if (maMonHoc == "")
+                {
+                    goto loop;
+                }
+                if (!kiemTraMaLop(llop, maLop))
+                {
+                    cout << "Ma lop khong ton tai" << endl;
+                    getchar();
+                    continue;
+                }
+                if (!kiemTraMaMonHoc(lMonHoc, maMonHoc))
+                {
+                    cout << "Ma mon hoc khong ton tai" << endl;
+                    continue;
+                }
+                xuatBangDiemTheoLop(lDiemThi, lSinhVien, maLop, maMonHoc);
+                getchar();
+            }
         }
         if (a == 6)
         {

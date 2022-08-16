@@ -201,4 +201,23 @@ void suaMonHoc(NodeMonHoc *p, string tenMon)
     p->tenMon = tenMon;
 }
 
+bool kiemTraMaMonHoc(DanhSachMonHoc root, string maMon)
+{
+    if (root != NULL)
+    {
+        if (root->maMon.compare(maMon) > 0)
+        {
+            return kiemTraMaMonHoc(root->left, maMon);
+        }
+        else if (root->maMon.compare(maMon) < 0)
+        {
+            return kiemTraMaMonHoc(root->right, maMon);
+        }
+        else
+        {
+            return true;
+        }
+    }
+    return false;
+}
 #endif
