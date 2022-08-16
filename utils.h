@@ -25,6 +25,26 @@ int nhapso(string msg = "")
         }
     }
 }
+float nhapsothuc(string msg = "")
+{
+    fflush(stdin);
+    float a;
+    cout << msg;
+    while (true)
+    {
+        cin >> a;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << msg;
+        }
+        else
+        {
+            return a;
+        }
+    }
+}
 string nhapchuoi(string msg = "", int maxLength = 999)
 {
     fflush(stdin);

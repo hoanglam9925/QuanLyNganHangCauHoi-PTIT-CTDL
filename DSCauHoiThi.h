@@ -3,6 +3,8 @@
 #include <bits/stdc++.h>
 #include "mylib.h"
 #include "utils.h"
+#include <ctime>
+
 using namespace std;
 typedef struct CauHoiThi
 {
@@ -114,6 +116,52 @@ void suaCauHoi(CauHoiThi cauHoiThi[], int index)
     cauHoiThi[index].dapAn = dapAn;
 }
 
+void chonNgauNhienCauHoi(CauHoiThi cauHoiThi[], int soLuong, CauHoiThi kq[])
+{
+    for (int i = 0; i < soLuong; i++)
+    {
+        int index = rand() % soLuong;
+    newLoop:
+        for (int j = 0; j < i; j++)
+        {
+            if (kq[j].noiDung == cauHoiThi[index].noiDung)
+            {
+                index = rand() % soLuong;
+                goto newLoop;
+            }
+        }
+        kq[i] = cauHoiThi[index];
+    }
+}
+
+int chonDapAn(CauHoiThi cauHoiThi[], int soLuong, time_t timeExpire)
+{
+    int soCauDung = 0;
+    for (int i = 0; i < soLuong; i++)
+    {
+        clrscr();
+        gotoxy(35, 5);
+        time_t now = time(0);
+        if (now - timeExpire > 0)
+        {
+            return soCauDung;
+        }
+        cout << "Thoi gian con lai " << timeExpire - now << " giay" << endl;
+        cout << "Cau hoi thu " << i + 1 << endl;
+        cout << "Noi dung cau hoi: " << cauHoiThi[i].noiDung << endl;
+        cout << "1: " << cauHoiThi[i].a << endl;
+        cout << "2: " << cauHoiThi[i].b << endl;
+        cout << "3: " << cauHoiThi[i].c << endl;
+        cout << "4: " << cauHoiThi[i].d << endl;
+        // cout << "Dap an: " << cauHoiThi[i].dapAn << endl;
+        int dapAn = nhapso("Nhap dap an: ");
+        if (dapAn == cauHoiThi[i].dapAn)
+        {
+            soCauDung++;
+        }
+    }
+    return soCauDung;
+}
 // CauHoiThi a[200];
 //     int length = 0;
 //     themCauHoiThi(a, length);

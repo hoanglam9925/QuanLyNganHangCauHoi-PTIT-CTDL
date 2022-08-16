@@ -1,7 +1,35 @@
-test
-test
-test
-test
-test
+Danh sach lien ket don co may con tro den phan tu khac
 1
-INT1
+2
+3
+4
+1
+CTDL
+Danh sach lien ket doi co may con tro den phan tu khac
+1
+2
+3
+4
+2
+CTDL
+Cap phat bo nho dong theo C nhu the nao
+Su dung new
+Su dung malloc
+Su dung calloc
+Ca b va c
+4
+CTDL
+Cap phat bo nho dong theo C++ nhu the nao
+Su dung new
+Su dung malloc
+Su dung calloc
+Ca b va c
+1
+CTDL
+Xoa bo nho dong nhu the nao
+delete
+free
+ca a va b deu dung
+ca a va b deu sai
+3
+CTDL

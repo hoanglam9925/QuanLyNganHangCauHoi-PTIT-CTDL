@@ -7,7 +7,7 @@ struct DiemSinhVien
 {
     string maSv;
     string maMon;
-    int diem;
+    float diem;
 };
 
 struct DiemThi
@@ -33,14 +33,12 @@ void themDiemThi(ListDiemThi &l, DiemThi *dt)
 {
     if (l.head == NULL)
     {
-        l.head = new DiemThi;
         l.head = dt;
         l.tail = l.head;
     }
     else
     {
-        l.tail->next = new DiemThi;
-        l.tail = l.tail->next;
+        l.tail->next = dt;
         l.tail = dt;
     }
 }
@@ -77,7 +75,7 @@ void xuatDiemThi(ListDiemThi l)
     }
 }
 
-void suaDiemThi(ListDiemThi &l, string maSv, string maMon, int diem)
+void suaDiemThi(ListDiemThi &l, string maSv, string maMon, float diem)
 {
     DiemThi *p = l.head;
     while (p != NULL)
@@ -97,7 +95,17 @@ void nhapDiemThi(ListDiemThi &l)
     int diem;
     maSv = nhapchuoi("Nhap ma sinh vien: ");
     maMon = nhapchuoi("Nhap ma mon: ");
-    diem = nhapso("Nhap diem: ");
+    diem = nhapsothuc("Nhap diem: ");
+    dt->sinhVien.maSv = maSv;
+    dt->sinhVien.diem = diem;
+    dt->sinhVien.maMon = maMon;
+    dt->maMon = maMon;
+    themDiemThi(l, dt);
+}
+
+void taoDiemThi(ListDiemThi &l, string maSv, string maMon, float diem)
+{
+    DiemThi *dt = new DiemThi;
     dt->sinhVien.maSv = maSv;
     dt->sinhVien.diem = diem;
     dt->sinhVien.maMon = maMon;

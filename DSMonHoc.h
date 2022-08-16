@@ -5,6 +5,7 @@
 #include <string>
 #include "utils.h"
 #include "DSCauHoiThi.h"
+#include "DSLop.h"
 typedef struct NodeMonHoc
 {
     string maMon; // use str.resize(15) to fix the size of maMon
@@ -199,4 +200,5 @@ void suaMonHoc(NodeMonHoc *p, string tenMon)
 {
     p->tenMon = tenMon;
 }
+
 #endif

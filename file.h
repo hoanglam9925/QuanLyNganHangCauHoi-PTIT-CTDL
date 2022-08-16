@@ -17,6 +17,7 @@
 #include <fstream>
 #include "DSLop.h"
 #include "DSCauHoiThi.h"
+#include "DSDiemThi.h"
 
 using namespace std;
 /*
@@ -36,12 +37,13 @@ bool login(string userName, string password, int role)
 
         while (!input.eof())
         {
-            input >> fMaSV;
-            input >> fHo;
-            input >> fTen;
-            input >> fGioiTinh;
-            input >> fPassword;
-            input >> fLop;
+            string fMaSV, fHo, fTen, fGioiTinh, fPassword, fLop;
+            getline(input, fMaSV, '\n');
+            getline(input, fHo, '\n');
+            getline(input, fTen, '\n');
+            getline(input, fGioiTinh, '\n');
+            getline(input, fPassword, '\n');
+            getline(input, fLop, '\n');
             if (fMaSV == userName && fPassword == password)
             {
                 cout << "Dang nhap thanh cong" << endl;
@@ -319,6 +321,47 @@ void docFileMonHoc(DanhSachMonHoc &lMonHoc)
             CauHoiThi cauHoiThi[200];
             int length = docFileCauHoi(cauHoiThi, fMaMonHoc);
             taoMonHoc(lMonHoc, fMaMonHoc, fTenMonHoc, cauHoiThi, length);
+        }
+    }
+}
+
+void luuFileDiemThi(ListDiemThi lDiemThi)
+{
+    ofstream output("DSDiemThi.txt");
+    if (!output)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    DiemThi *p = lDiemThi.head;
+    while (p != NULL)
+    {
+        output << p->sinhVien.maSv << endl;
+        output << p->sinhVien.maMon << endl;
+        output << p->sinhVien.diem << endl;
+        p = p->next;
+    }
+}
+void docFileDiemThi(ListDiemThi &lDiemThi)
+{
+    ifstream input("DSDiemThi.txt");
+    if (!input)
+    {
+        cout << "Khong tim thay thong tin" << endl;
+        return;
+    }
+    while (!input.eof())
+    {
+        string fMaSinhVien, fMaMonHoc, fDiem;
+        getline(input, fMaSinhVien, '\n');
+        getline(input, fMaMonHoc, '\n');
+        getline(input, fDiem, '\n');
+        // string to float diem
+        float diem = atof(fDiem.c_str());
+        // int diem = atoi(fDiem.c_str());
+        if (fMaSinhVien != "")
+        {
+            taoDiemThi(lDiemThi, fMaSinhVien, fMaMonHoc, diem);
         }
     }
 }

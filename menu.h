@@ -6,12 +6,14 @@
 #include "quanLySinhVien.h"
 #include "quanLyMonHoc.h"
 #include "quanLyCauHoi.h"
+#include "DSDiemThi.h"
+#include <ctime>
 
 using namespace std;
-bool dangNhap(int);
+bool dangNhap(int, string, string);
 void menuGV();
 void mainmenu();
-void menuSV();
+void menuSV(string);
 
 void mainmenu() // lua chon che do nguoi dung (giao vien/ sinh vien)
 {
@@ -35,7 +37,10 @@ void mainmenu() // lua chon che do nguoi dung (giao vien/ sinh vien)
         if (a == 1)
         {
             clrscr();
-            if (dangNhap(1))
+            string userName, password;
+            userName = nhapchuoi("Nhap username: ");
+            password = nhapchuoi("Nhap mat khau: ");
+            if (dangNhap(1, userName, password))
             {
                 menuGV();
             }
@@ -47,11 +52,19 @@ void mainmenu() // lua chon che do nguoi dung (giao vien/ sinh vien)
         }
         if (a == 2)
         {
-            if (dangNhap(2))
+            clrscr();
+            string userName, password;
+            userName = nhapchuoi("Nhap username: ");
+            password = nhapchuoi("Nhap mat khau: ");
+            if (dangNhap(2, userName, password))
             {
-                //                menuSV();
+                menuSV(userName);
             }
-            getchar();
+            else
+            {
+                cout << "Dang nhap that bai" << endl;
+                getchar();
+            }
         }
         if (a == 3)
         {
@@ -59,10 +72,7 @@ void mainmenu() // lua chon che do nguoi dung (giao vien/ sinh vien)
         }
     }
 }
-void menuSV()
-{
-    clrscr();
-}
+
 void menuGV()
 {
     clrscr();
@@ -153,11 +163,114 @@ void menuGV()
     }
 }
 
-bool dangNhap(int role)
+void menuSV(string maSv)
 {
-    string userName, password;
-    userName = nhapchuoi("Nhap username: ");
-    password = nhapchuoi("Nhap mat khau: ");
+    clrscr();
+    bool isExit = false;
+    DanhSachLop llop;
+    khoiTaoDanhSachLop(llop);
+    docFileLop(llop);
+
+    DanhSachMonHoc lMonHoc;
+    khoiTaoDanhSachMonHoc(lMonHoc);
+    docFileMonHoc(lMonHoc);
+
+    ListSinhVien lSinhVien;
+    initListSinhVien(lSinhVien);
+
+    ListDiemThi lDiemThi;
+    initListDiemThi(lDiemThi);
+    docFileDiemThi(lDiemThi);
+
+largeLoop:
+    while (!isExit)
+    {
+        clrscr();
+        string maLop, maMon;
+        int soCauHoi, soPhut;
+        while (true)
+        {
+        smallLoop:
+            // maSv = nhapchuoi("Nhap ma sinh vien: ", 15);
+            maLop = nhapchuoi("Nhap ma lop: ", 15);
+            maMon = nhapchuoi("Nhap ma mon: ", 15);
+            soCauHoi = nhapso("Nhap so cau hoi: ");
+            soPhut = nhapso("Nhap so phut: ");
+            if (maSv == "" || maLop == "" || maMon == "" || soCauHoi < 1 || soPhut < 0)
+            {
+                cout << "Nhap sai" << endl;
+                continue;
+            }
+            else
+            {
+                int index = timIndexLop(llop, maLop);
+                if (index != -1)
+                {
+                    lSinhVien = llop.lop[index].listSinhVien;
+                }
+
+                if (!kiemTraMaSv(lSinhVien, maSv))
+                {
+                    cout << "Ma sinh vien khong hop le" << endl;
+                    continue;
+                }
+
+                NodeMonHoc *p = timKiemMonHoc(lMonHoc, maMon);
+                if (p == NULL)
+                {
+                    cout << "Ma mon khong hop le" << endl;
+                    continue;
+                }
+                DiemThi *diem = lDiemThi.head;
+                while (diem != NULL)
+                {
+                    if (diem->sinhVien.maSv == maSv && diem->sinhVien.maMon == maMon)
+                    {
+                        cout << "Sinh vien da thi mon nay" << endl;
+                        goto smallLoop;
+                    }
+                    diem = diem->next;
+                }
+
+                if (p->length < soCauHoi)
+                {
+                    cout << "So cau hoi khong hop le" << endl;
+                    continue;
+                }
+                if (p->length == 0)
+                {
+                    cout << "Mon hoc khong co cau hoi. Chua the thi" << endl;
+                    continue;
+                }
+
+                CauHoiThi lCauHoi[200];
+                chonNgauNhienCauHoi(p->cauHoiThi, soCauHoi, lCauHoi);
+                time_t timeExpire = time(0) + soPhut * 60;
+                int soCauDung = chonDapAn(lCauHoi, soCauHoi, timeExpire);
+                float diemKq = soCauDung * 10.0 / soCauHoi;
+                cout << "Diem: " << diemKq << endl;
+                getchar();
+                getchar();
+
+                DiemThi *diemThi = new DiemThi;
+                diemThi->maMon = maMon;
+                diemThi->sinhVien.maSv = maSv;
+                diemThi->sinhVien.maMon = maMon;
+                diemThi->sinhVien.diem = diemKq;
+                diemThi->next = NULL;
+
+                themDiemThi(lDiemThi, diemThi);
+                luuFileDiemThi(lDiemThi);
+                isExit = true;
+                goto largeLoop;
+            }
+        }
+    }
+}
+
+bool dangNhap(int role, string userName, string password)
+{
+
     return login(userName, password, role);
 }
 #endif // __MENU_H__

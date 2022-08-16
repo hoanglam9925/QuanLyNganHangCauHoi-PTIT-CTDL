@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "mylib.h"
 #include "DSSinhVien.h"
+#include "DSMonHoc.h"
 
 using namespace std;
 
