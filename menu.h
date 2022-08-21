@@ -229,7 +229,8 @@ largeLoop:
         while (true)
         {
         smallLoop:
-            // maSv = nhapchuoi("Nhap ma sinh vien: ", 15);
+            // zzz
+            //  maSv = nhapchuoi("Nhap ma sinh vien: ", 15);
             maLop = nhapchuoi("Nhap ma lop: ", 15);
             maMon = nhapchuoi("Nhap ma mon: ", 15);
             soCauHoi = nhapso("Nhap so cau hoi: ");
