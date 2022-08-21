@@ -56,6 +56,13 @@ int themMonHocVaoDanhSachMonHoc(DanhSachMonHoc &root, NodeMonHoc *p)
         {
             themMonHocVaoDanhSachMonHoc(root->right, p);
         }
+        else if (root->maMon.compare(p->maMon) == 0)
+        {
+            cout << "Khong the them mon hoc co ma mon da ton tai" << endl;
+            getchar();
+            getchar();
+            return 0;
+        }
         else
         {
             return 0;

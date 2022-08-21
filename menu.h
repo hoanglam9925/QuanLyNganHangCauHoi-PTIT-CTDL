@@ -265,7 +265,10 @@ largeLoop:
                     if (diem->sinhVien.maSv == maSv && diem->sinhVien.maMon == maMon)
                     {
                         cout << "Sinh vien da thi mon nay" << endl;
-                        goto smallLoop;
+                        getchar();
+                        getchar();
+                        isExit = true;
+                        goto largeLoop;
                     }
                     diem = diem->next;
                 }
