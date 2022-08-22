@@ -13,7 +13,7 @@ typedef struct CauHoiThi
     string b;
     string c;
     string d;
-    int dapAn;
+    string dapAn;
 };
 
 void themCauHoiThi(CauHoiThi cauHoiThi[], int &length)
@@ -38,8 +38,8 @@ void themCauHoiThi(CauHoiThi cauHoiThi[], int &length)
     getline(cin, cauHoiThi[length].d);
 dapan:
     fflush(stdin);
-    cauHoiThi[length].dapAn = nhapso("Nhap dap an:");
-    if (cauHoiThi[length].dapAn < 1 || cauHoiThi[length].dapAn > 4)
+    cauHoiThi[length].dapAn = nhapchuoi("Nhap dap an:");
+    if (cauHoiThi[length].dapAn.compare("A") < 0 || cauHoiThi[length].dapAn.compare("D") > 0)
     {
         cout << "Dap an khong hop le. Nhap lai: " << endl;
         goto dapan;
@@ -64,7 +64,7 @@ void xoaCauHoiThi(CauHoiThi cauHoiThi[], int index, int &length)
     cauHoiThi[i].b = "";
     cauHoiThi[i].c = "";
     cauHoiThi[i].d = "";
-    cauHoiThi[i].dapAn = 0;
+    cauHoiThi[i].dapAn = "";
 
     length--;
 }
@@ -107,7 +107,13 @@ void suaCauHoi(CauHoiThi cauHoiThi[], int index)
     string dapAnB = nhapchuoi("Nhap dap an B: ");
     string dapAnC = nhapchuoi("Nhap dap an C: ");
     string dapAnD = nhapchuoi("Nhap dap an D: ");
-    int dapAn = nhapso("Nhap dap an: ");
+DAPAN:
+    string dapAn = nhapchuoi("Nhap dap an: ");
+    if (dapAn.compare("A") < 0 || dapAn.compare("D") > 0)
+    {
+        cout << "Dap an khong hop le. Nhap lai: " << endl;
+        goto DAPAN;
+    }
     cauHoiThi[index].noiDung = noiDung;
     cauHoiThi[index].a = dapAnA;
     cauHoiThi[index].b = dapAnB;
@@ -154,8 +160,8 @@ int chonDapAn(CauHoiThi cauHoiThi[], int soLuong, time_t timeExpire)
         cout << "3: " << cauHoiThi[i].c << endl;
         cout << "4: " << cauHoiThi[i].d << endl;
         // cout << "Dap an: " << cauHoiThi[i].dapAn << endl;
-        int dapAn = nhapso("Nhap dap an: ");
-        if (dapAn == cauHoiThi[i].dapAn)
+        string dapAn = nhapchuoi("Nhap dap an: ");
+        if (dapAn.compare(cauHoiThi[i].dapAn) == 0)
         {
             soCauDung++;
         }
